@@ -1,6 +1,5 @@
 package com.jbappz.githubbrowser.repository
 
-import android.accounts.NetworkErrorException
 import androidx.lifecycle.MutableLiveData
 import com.jbappz.githubbrowser.api.GithubRetrofitBuilder
 import com.jbappz.githubbrowser.model.GithubRepo
@@ -16,11 +15,12 @@ object Repository {
                 val call: Call<List<GithubRepo>> = GithubRetrofitBuilder.API_SERVICE.getRepos(userId)
                 call.enqueue(object: Callback<List<GithubRepo>> {
                     override fun onResponse(call: Call<List<GithubRepo>>, response: Response<List<GithubRepo>>) {
+                        // Body must not be null, return empty list if null
                         value = response.body() ?: emptyList()
                     }
 
                     override fun onFailure(call: Call<List<GithubRepo>>, t: Throwable) {
-                        throw NetworkErrorException("Failure getting api data")
+                        value = emptyList()
                     }
                 })
             }

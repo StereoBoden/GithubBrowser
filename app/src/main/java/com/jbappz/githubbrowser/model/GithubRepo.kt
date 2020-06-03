@@ -10,16 +10,16 @@ data class GithubRepo(
     val forks: Int,
     val watchers: String,
     val owner: Owner,
-    val licence: Licence
+    val license: License
 )
 
 data class Owner(
-    val name: String,
+    val login: String,
     @SerializedName("avatar_url")
     val avatarUrl: String
 )
 
-data class Licence(
+data class License(
     val key: String,
     val name: String,
     val url: String
