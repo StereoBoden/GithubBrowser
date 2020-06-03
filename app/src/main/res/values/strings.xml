@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">GithubBrowser</string>
+    <string name="app_name">Github Browser</string>
+
+    <!-- Views -->
+    <string name="enter_github_user">Enter github user id</string>
+    <string name="search">Search</string>
 </resources>
