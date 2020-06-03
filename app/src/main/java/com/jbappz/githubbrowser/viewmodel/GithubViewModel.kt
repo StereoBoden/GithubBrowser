@@ -19,12 +19,13 @@ class GithubViewModel: ViewModel() {
         getGithubData()
     }
 
-    fun getData(): LiveData<List<GithubRepo>> {
-        return githubLiveData
-    }
+    fun getData(): LiveData<List<GithubRepo>> =
+        githubLiveData
 
-    fun getRepoData(userId: String) {
+    fun search(userId: String) {
         isErrorLiveData.value = false
+        isLoadingData.value = false
+
         if (_userId.value == userId) {
             return
         }
@@ -38,14 +39,12 @@ class GithubViewModel: ViewModel() {
             // Use switch map when _userId changes, get new github data
             githubLiveData = Transformations
                 .switchMap(_userId) {
+                    isLoadingData.value = true
                     Repository.getRepoData(it)
                 }
         }
         catch (e: Exception) {
             isErrorLiveData.value = true
-        }
-        finally {
-            isLoadingData.value = false
         }
     }
 }

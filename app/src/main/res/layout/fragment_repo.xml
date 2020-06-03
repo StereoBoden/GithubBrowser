@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textViewDialogName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/unit3"
+            android:layout_marginTop="@dimen/unit3"
+            android:text="@string/repo_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewDialogLanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/unit3"
+            android:layout_marginTop="@dimen/unit3"
+            android:text="@string/repo_language"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDialogName" />
+
+        <TextView
+            android:id="@+id/textViewDialogOpenIssues"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/repo_open_issues"
+            android:layout_marginStart="@dimen/unit3"
+            android:layout_marginTop="@dimen/unit3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDialogLanguage" />
+
+        <TextView
+            android:id="@+id/textViewDialogForks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/repo_forks"
+            android:layout_marginStart="@dimen/unit3"
+            android:layout_marginTop="@dimen/unit3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDialogOpenIssues" />
+
+        <TextView
+            android:id="@+id/textViewDialogWatchers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/repo_watchers"
+            android:layout_marginStart="@dimen/unit3"
+            android:layout_marginTop="@dimen/unit3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDialogForks" />
+
+        <TextView
+            android:id="@+id/textViewDialogOwnerLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/repo_owner_login"
+            android:layout_marginStart="@dimen/unit3"
+            android:layout_marginTop="@dimen/unit3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDialogWatchers" />
+
+        <TextView
+            android:id="@+id/textViewDialogLicenseKey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/repo_license_key"
+            android:layout_marginStart="@dimen/unit3"
+            android:layout_marginTop="@dimen/unit3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDialogOwnerLogin" />
+
+        <TextView
+            android:id="@+id/textViewDialogLicenseName"
+            android:layout_width="61dp"
+            android:layout_height="18dp"
+            android:text="@string/repo_license_name"
+            android:layout_marginStart="@dimen/unit3"
+            android:layout_marginTop="@dimen/unit3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDialogLicenseKey" />
+
+        <TextView
+            android:id="@+id/textViewDialogLicenseUrl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/repo_license_url"
+            android:layout_marginStart="@dimen/unit3"
+            android:layout_marginTop="@dimen/unit3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDialogLicenseName" />
+
+        <Button
+            android:id="@+id/buttonOK"
+            style="@style/GithubButton"
+            android:text="@string/OK"
+            android:layout_marginBottom="@dimen/unit3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

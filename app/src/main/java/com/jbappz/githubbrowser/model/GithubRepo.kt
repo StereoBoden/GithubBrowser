@@ -9,8 +9,8 @@ data class GithubRepo(
     val openIssuesCount: Int,
     val forks: Int,
     val watchers: String,
-    val owner: Owner,
-    val license: License
+    val owner: Owner?,
+    val license: License?
 )
 
 data class Owner(
