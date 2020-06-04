@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jbappz.githubbrowser.R
 import com.jbappz.githubbrowser.model.GithubRepo
@@ -50,6 +51,7 @@ class GithubSearchFragment: Fragment() {
         recyclerViewGithub.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = githubAdapter
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
 
         buttonSearch.setOnClickListener {

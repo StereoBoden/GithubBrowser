@@ -29,6 +29,7 @@ class GithubAdapter: RecyclerView.Adapter<GithubAdapter.GithubViewHolder>() {
         fun bind(item: GithubRepo, itemClick: ((GithubRepo) -> Unit)?) {
             val textView = itemView.findViewById<TextView>(android.R.id.text1)
             textView.text = item.name
+
             itemView.setOnClickListener {
                 itemClick?.invoke(item)
             }
