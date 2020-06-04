@@ -1,4 +1,4 @@
-package com.jbappz.githubbrowser.view
+package com.jbappz.githubbrowser.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,13 +10,15 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jbappz.githubbrowser.R
 import com.jbappz.githubbrowser.model.GithubRepo
+import com.jbappz.githubbrowser.view.GithubAdapter
 import com.jbappz.githubbrowser.viewmodel.GithubViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
 
 class GithubSearchFragment: Fragment() {
 
     companion object {
-        fun newInstance(): GithubSearchFragment = GithubSearchFragment()
+        fun newInstance(): GithubSearchFragment =
+            GithubSearchFragment()
     }
     private val githubViewModel = GithubViewModel()
 

@@ -3,7 +3,7 @@ package com.jbappz.githubbrowser
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
-import com.jbappz.githubbrowser.view.GithubSearchFragment
+import com.jbappz.githubbrowser.view.fragments.GithubSearchFragment
 
 class MainActivity : AppCompatActivity() {
 

@@ -8,16 +8,17 @@
     <string name="OK">OK</string>
 
     <!-- Repo Fragment -->
-    <string name="repo_name">Name:&#160;</string>
+    <string name="repo_owner">Owner:&#160;</string>
     <string name="repo_language">Language:&#160;</string>
     <string name="repo_open_issues">Open Issues:&#160;</string>
     <string name="repo_forks">Forks:&#160;</string>
     <string name="repo_watchers">Watchers:&#160;</string>
-    <string name="repo_owner_login">Owner Login:&#160;</string>
-    <string name="repo_license_key">License Key:&#160;</string>
-    <string name="repo_license_name">License Name:&#160;</string>
-    <string name="repo_license_url">License Url:&#160;</string>
+    <string name="repo_stargazers">Stargazers:&#160;</string>
+    <string name="repo_default_branch">Default Branch:&#160;</string>
+    <string name="repo_license_subtitle">License</string>
 
     <!-- Errors -->
     <string name="results_error">There has been an error getting results from Github</string>
+    <string name="repo_information_subtitle">Repo Information</string>
+
 </resources>
