@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
@@ -38,6 +39,8 @@ class GithubSearchFragment: Fragment() {
         githubViewModel.getData().observe(viewLifecycleOwner, Observer<List<GithubRepo>> {
             progressBar.visibility = View.GONE
             githubAdapter.addData(it)
+
+            if(it.isEmpty()) Toast.makeText(context, R.string.error_no_repos, Toast.LENGTH_LONG).show()
         })
 
         githubViewModel.isLoadingData.observe(viewLifecycleOwner, Observer<Boolean> {
@@ -51,7 +54,8 @@ class GithubSearchFragment: Fragment() {
         recyclerViewGithub.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = githubAdapter
-            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+            addItemDecoration(
+                DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
 
         buttonSearch.setOnClickListener {
