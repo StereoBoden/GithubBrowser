@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.jbappz.githubbrowser.api.GithubRetrofitBuilder
 import com.jbappz.githubbrowser.model.GithubReadMe
 import com.jbappz.githubbrowser.model.GithubRepo
+import com.jbappz.githubbrowser.model.GithubRepos
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Call
@@ -17,14 +18,14 @@ object Repository {
         return object: MutableLiveData<List<GithubRepo>>() {
             override fun onActive() {
                 super.onActive()
-                val call: Call<List<GithubRepo>> = GithubRetrofitBuilder.API_SERVICE.getRepos(userId)
-                call.enqueue(object: Callback<List<GithubRepo>> {
-                    override fun onResponse(call: Call<List<GithubRepo>>, response: Response<List<GithubRepo>>) {
+                val call: Call<GithubRepos> = GithubRetrofitBuilder.API_SERVICE.getRepos(userId)
+                call.enqueue(object: Callback<GithubRepos> {
+                    override fun onResponse(call: Call<GithubRepos>, response: Response<GithubRepos>) {
                         // Body must not be null, return empty list if null
-                        value = response.body() ?: emptyList()
+                        value = response.body()?.items ?: emptyList()
                     }
 
-                    override fun onFailure(call: Call<List<GithubRepo>>, t: Throwable) {
+                    override fun onFailure(call: Call<GithubRepos>, t: Throwable) {
                         value = emptyList()
                     }
                 })

@@ -40,7 +40,7 @@ class ViewModelTests {
 
     @Test
     fun `Given user searches for a Repo the loading indicator shows`() {
-        viewModel.search("SomeGithubUser")
+        viewModel.search("SomeGithubRepo")
         val captor = ArgumentCaptor.forClass(Boolean::class.java)
         captor.run {
             verify(isLoadingDataObserver, times(2)).onChanged(capture())
@@ -49,9 +49,9 @@ class ViewModelTests {
     }
 
     @Test
-    fun `Given user searches the same user twice the data is not loaded twice`() {
-        viewModel.search("SomeGithubUser")
-        viewModel.search("SomeGithubUser")
+    fun `Given user searches the same repo twice the data is not loaded twice`() {
+        viewModel.search("SomeGithubRepo")
+        viewModel.search("SomeGithubRepo")
 
         val captor = ArgumentCaptor.forClass(Boolean::class.java)
         captor.run {

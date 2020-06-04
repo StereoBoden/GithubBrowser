@@ -2,6 +2,8 @@ package com.jbappz.githubbrowser.model
 
 import com.google.gson.annotations.SerializedName
 
+data class GithubRepos(val items: List<GithubRepo>)
+
 data class GithubRepo(
     val name: String,
     val language: String,

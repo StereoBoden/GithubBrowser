@@ -12,7 +12,7 @@ class GithubViewModel: ViewModel() {
 
     // Live github repo data
     private var _githubLiveData: LiveData<List<GithubRepo>> = MutableLiveData()
-    private var _userId: MutableLiveData<String> = MutableLiveData()
+    private var _repoName: MutableLiveData<String> = MutableLiveData()
 
     // Github readme data
     private var _gitHubReadMeUrl: LiveData<String> = MutableLiveData()
@@ -28,15 +28,15 @@ class GithubViewModel: ViewModel() {
 
     fun getData(): LiveData<List<GithubRepo>> = _githubLiveData
 
-    // Search github by user id
-    fun search(userId: String) {
+    // Search github by repo name
+    fun search(repoName: String) {
         isErrorLiveData.value = false
         isLoadingData.value = false
 
-        if (_userId.value == userId) return
+        if (_repoName.value == repoName) return
 
         isLoadingData.value = true
-        _userId.value = userId
+        _repoName.value = repoName
     }
 
     // Search for repo readme
@@ -58,7 +58,7 @@ class GithubViewModel: ViewModel() {
         try {
             // Use switch map when _userId changes, get new github data
             _githubLiveData = Transformations
-                .switchMap(_userId) {
+                .switchMap(_repoName) {
                     Repository.getRepoData(it)
                 }
         }

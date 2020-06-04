@@ -3,7 +3,7 @@
 
     <!-- Views -->
     <string name="search_title">Search Github</string>
-    <string name="enter_github_user">Enter github user id</string>
+    <string name="enter_github_repo">Enter github repo name</string>
     <string name="search_button">Search</string>
     <string name="readme">ReadMe</string>
     <string name="OK">OK</string>

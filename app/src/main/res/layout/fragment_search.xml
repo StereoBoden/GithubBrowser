@@ -37,7 +37,7 @@
         android:layout_marginStart="@dimen/unit3"
         android:layout_marginTop="@dimen/unit2"
         android:layout_marginEnd="@dimen/unit3"
-        android:hint="@string/enter_github_user"
+        android:hint="@string/enter_github_repo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
