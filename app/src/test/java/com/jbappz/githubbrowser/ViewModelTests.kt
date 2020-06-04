@@ -17,6 +17,8 @@ import org.mockito.MockitoAnnotations
 
 class ViewModelTests {
 
+    //TODO: Add full unit test coverage
+
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
