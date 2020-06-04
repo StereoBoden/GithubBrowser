@@ -32,6 +32,7 @@ class GithubRepoFragment: Fragment() {
         private const val KEY_LICENSE_KEY: String = "license_key"
         private const val KEY_LICENSE_URL: String = "license_url"
 
+        // TODO: Consider migrating strings and ints to single parcelable object
         fun newInstance(githubRepo: GithubRepo): GithubRepoFragment {
             val bundle = Bundle()
             bundle.putString(KEY_NAME, githubRepo.name)

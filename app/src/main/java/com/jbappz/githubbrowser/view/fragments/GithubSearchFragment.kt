@@ -19,8 +19,7 @@ import kotlinx.android.synthetic.main.fragment_search.*
 class GithubSearchFragment: Fragment() {
 
     companion object {
-        fun newInstance(): GithubSearchFragment =
-            GithubSearchFragment()
+        fun newInstance(): GithubSearchFragment = GithubSearchFragment()
     }
     private val githubViewModel = GithubViewModel()
 
@@ -30,12 +29,14 @@ class GithubSearchFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Recyclerview adapter
         val githubAdapter = GithubAdapter().apply {
             itemClick = {
                 showFragment(it)
             }
         }
 
+        // Github repo data for searched user id
         githubViewModel.getData().observe(viewLifecycleOwner, Observer<List<GithubRepo>> {
             progressBar.visibility = View.GONE
             githubAdapter.addData(it)
@@ -43,10 +44,12 @@ class GithubSearchFragment: Fragment() {
             if(it.isEmpty()) Toast.makeText(context, R.string.error_no_repos, Toast.LENGTH_LONG).show()
         })
 
+        // Bind progress dialog visibility to isLoadingData
         githubViewModel.isLoadingData.observe(viewLifecycleOwner, Observer<Boolean> {
             progressBar.visibility = if(it) View.VISIBLE else View.GONE
         })
 
+        // Show error textview on error
         githubViewModel.isErrorLiveData.observe(viewLifecycleOwner, Observer<Boolean> {
             textViewResultsError.visibility = if(it) View.VISIBLE else View.GONE
         })

@@ -12,6 +12,7 @@ import retrofit2.Response
 import java.io.IOException
 
 object Repository {
+
     fun getRepoData(userId: String): MutableLiveData<List<GithubRepo>> {
         return object: MutableLiveData<List<GithubRepo>>() {
             override fun onActive() {

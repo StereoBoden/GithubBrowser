@@ -6,12 +6,15 @@ import com.jbappz.githubbrowser.repository.Repository
 import java.lang.Exception
 
 class GithubViewModel: ViewModel() {
+    // Loading and error live data
     var isLoadingData: MutableLiveData<Boolean> = MutableLiveData()
     var isErrorLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
+    // Live github repo data
     private var _githubLiveData: LiveData<List<GithubRepo>> = MutableLiveData()
     private var _userId: MutableLiveData<String> = MutableLiveData()
 
+    // Github readme data
     private var _gitHubReadMeUrl: LiveData<String> = MutableLiveData()
     private var _readMeValues: MutableLiveData<ReadMeValues> = MutableLiveData()
     private data class ReadMeValues(val owner: String, val repoName: String)
@@ -25,6 +28,7 @@ class GithubViewModel: ViewModel() {
 
     fun getData(): LiveData<List<GithubRepo>> = _githubLiveData
 
+    // Search github by user id
     fun search(userId: String) {
         isErrorLiveData.value = false
         isLoadingData.value = false
@@ -35,6 +39,7 @@ class GithubViewModel: ViewModel() {
         _userId.value = userId
     }
 
+    // Search for repo readme
     fun searchForReadMe(owner: String?, repoName: String?) {
         isErrorLiveData.value = false
         isLoadingData.value = false

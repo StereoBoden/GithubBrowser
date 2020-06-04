@@ -10,6 +10,7 @@ class ReadMeDialogFragment: DialogFragment() {
     companion object {
         const val TAG: String = "ReadMeDialogFragment"
         private const val KEY_README_URL: String = "readmeURL"
+
         fun newInstance(readMeText: String): ReadMeDialogFragment {
             val fragment = ReadMeDialogFragment()
             val args = Bundle()
