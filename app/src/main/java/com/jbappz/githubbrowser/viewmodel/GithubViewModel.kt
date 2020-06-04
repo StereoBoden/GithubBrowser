@@ -41,6 +41,7 @@ class GithubViewModel: ViewModel() {
 
         if(owner == null || repoName == null) return
         if(owner.isEmpty() || repoName.isEmpty()) return
+        if (_readMeValues.value == ReadMeValues(owner, repoName)) return
 
         isLoadingData.value = true
         _readMeValues.value = ReadMeValues(owner, repoName)
@@ -53,7 +54,6 @@ class GithubViewModel: ViewModel() {
             // Use switch map when _userId changes, get new github data
             _githubLiveData = Transformations
                 .switchMap(_userId) {
-                    isLoadingData.value = true
                     Repository.getRepoData(it)
                 }
         }
@@ -67,7 +67,6 @@ class GithubViewModel: ViewModel() {
             // Use switch map when readMe value changes
             _gitHubReadMeUrl = Transformations
                 .switchMap(_readMeValues) {
-                    isLoadingData.value = true
                     Repository.getReadMeUrl(it.owner, it.repoName)
                 }
         }
@@ -81,7 +80,6 @@ class GithubViewModel: ViewModel() {
             // Use switch map when readMe data value changes
             _readMeData = Transformations
                 .switchMap(_gitHubReadMeUrl) {
-                    isLoadingData.value = true
                     Repository.downloadReadMe(it)
                 }
         }
