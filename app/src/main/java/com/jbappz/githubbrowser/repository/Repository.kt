@@ -54,6 +54,11 @@ object Repository {
             override fun onActive() {
                 super.onActive()
 
+                if(readMeUrl.isEmpty()) {
+                    postValue("")
+                    return
+                }
+
                 val client = OkHttpClient()
                 val request = Request.Builder()
                     .url(readMeUrl)

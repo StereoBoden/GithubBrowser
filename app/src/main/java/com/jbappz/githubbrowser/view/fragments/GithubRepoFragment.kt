@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.jbappz.githubbrowser.R
 import com.jbappz.githubbrowser.model.GithubRepo
 import com.jbappz.githubbrowser.viewmodel.GithubViewModel
 import kotlinx.android.synthetic.main.fragment_repo.*
-import kotlinx.android.synthetic.main.fragment_search.*
 
 class GithubRepoFragment: Fragment() {
 
@@ -86,7 +86,18 @@ class GithubRepoFragment: Fragment() {
         }
 
         githubViewModel.getReadMeData().observe(viewLifecycleOwner, Observer {
-            ReadMeDialogFragment.newInstance(it).show(parentFragmentManager, ReadMeDialogFragment.TAG)
+            progressBarReadMe.visibility = View.GONE
+            if(it.isEmpty()) {
+                Toast.makeText(context, R.string.error_no_readme, Toast.LENGTH_LONG).show()
+            }
+            else {
+                ReadMeDialogFragment.newInstance(it)
+                    .show(parentFragmentManager, ReadMeDialogFragment.TAG)
+            }
+        })
+
+        githubViewModel.isLoadingData.observe(viewLifecycleOwner, Observer {
+            progressBarReadMe.visibility = if(it) View.VISIBLE else View.GONE
         })
     }
 

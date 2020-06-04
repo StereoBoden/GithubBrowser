@@ -5,7 +5,6 @@
     <string name="search_title">Search Github</string>
     <string name="enter_github_user">Enter github user id</string>
     <string name="search_button">Search</string>
-    <string name="viewReadMe">View ReadMe</string>
     <string name="readme">ReadMe</string>
     <string name="OK">OK</string>
 
@@ -16,11 +15,12 @@
     <string name="repo_forks">Forks:&#160;</string>
     <string name="repo_watchers">Watchers:&#160;</string>
     <string name="repo_stargazers">Stargazers:&#160;</string>
+    <string name="repo_information_subtitle">Repo Information</string>
     <string name="repo_default_branch">Default Branch:&#160;</string>
     <string name="repo_license_subtitle">License</string>
 
     <!-- Errors -->
-    <string name="results_error">There has been an error getting results from Github</string>
-    <string name="repo_information_subtitle">Repo Information</string>
+    <string name="error_get_repo_results">There has been an error getting results from Github</string>
+    <string name="error_no_readme">There is no ReadMe in this Repo</string>
 
 </resources>
