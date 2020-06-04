@@ -5,14 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.jbappz.githubbrowser.R
 import com.jbappz.githubbrowser.model.GithubRepo
+import com.jbappz.githubbrowser.viewmodel.GithubViewModel
 import kotlinx.android.synthetic.main.fragment_repo.*
+import kotlinx.android.synthetic.main.fragment_search.*
 
 class GithubRepoFragment: Fragment() {
 
     companion object {
         private const val KEY_NAME: String = "name"
+
+        private const val KEY_OWNER_LOGIN: String = "owner_login"
+        private const val KEY_OWNER_AVATAR: String = "owner_avatar"
+
         private const val KEY_LANGUAGE: String = "language"
         private const val KEY_DESCRIPTION: String = "description"
         private const val KEY_OPEN_ISSUES_COUNT: String = "openIssuesCount"
@@ -21,9 +28,6 @@ class GithubRepoFragment: Fragment() {
         private const val KEY_STARGAZERS_COUNT: String = "stargazersCount"
         private const val KEY_DEFAULT_BRANCH: String = "defaultBranch"
 
-        private const val KEY_OWNER_LOGIN: String = "owner_login"
-        private const val KEY_OWNER_AVATAR: String = "owner_avatar"
-
         private const val KEY_LICENSE_NAME: String = "license_name"
         private const val KEY_LICENSE_KEY: String = "license_key"
         private const val KEY_LICENSE_URL: String = "license_url"
@@ -31,6 +35,8 @@ class GithubRepoFragment: Fragment() {
         fun newInstance(githubRepo: GithubRepo): GithubRepoFragment {
             val bundle = Bundle()
             bundle.putString(KEY_NAME, githubRepo.name)
+            bundle.putString(KEY_OWNER_LOGIN, githubRepo.owner?.login)
+            bundle.putString(KEY_OWNER_AVATAR, githubRepo.owner?.avatarUrl)
             bundle.putString(KEY_LANGUAGE, githubRepo.language)
             bundle.putString(KEY_DESCRIPTION, githubRepo.description)
             bundle.putInt(KEY_OPEN_ISSUES_COUNT, githubRepo.openIssuesCount)
@@ -38,8 +44,6 @@ class GithubRepoFragment: Fragment() {
             bundle.putString(KEY_WATCHERS, githubRepo.watchers)
             bundle.putInt(KEY_STARGAZERS_COUNT, githubRepo.stargazersCount)
             bundle.putString(KEY_DEFAULT_BRANCH, githubRepo.defaultBranch)
-            bundle.putString(KEY_OWNER_LOGIN, githubRepo.owner?.login)
-            bundle.putString(KEY_OWNER_AVATAR, githubRepo.owner?.avatarUrl)
             bundle.putString(KEY_LICENSE_NAME, githubRepo.license?.name)
             bundle.putString(KEY_LICENSE_KEY, githubRepo.license?.key)
             bundle.putString(KEY_LICENSE_URL, githubRepo.license?.url)
@@ -50,12 +54,18 @@ class GithubRepoFragment: Fragment() {
         }
     }
 
+    private val githubViewModel = GithubViewModel()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(R.layout.fragment_repo, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val repoName = arguments?.getString(KEY_NAME)
+        val ownerLogin = arguments?.getString(KEY_OWNER_LOGIN)
+
         super.onViewCreated(view, savedInstanceState)
-        textViewFragmentName.append(format(arguments?.getString(KEY_NAME)))
+        textViewFragmentName.append(format(repoName))
+        textViewFragmentOwnerLogin.append(format(ownerLogin))
         textViewFragmentLanguage.append(format(arguments?.getString(KEY_LANGUAGE)))
         textViewFragmentDescription.append(format(arguments?.getString(KEY_DESCRIPTION)))
         textViewFragmentOpenIssues.append(format(arguments?.getInt(KEY_OPEN_ISSUES_COUNT).toString()))
@@ -63,14 +73,21 @@ class GithubRepoFragment: Fragment() {
         textViewFragmentWatchers.append(format(arguments?.getString(KEY_WATCHERS)))
         textViewFragmentStargazersCount.append(format(arguments?.getInt(KEY_STARGAZERS_COUNT).toString()))
         textViewFragmentDefaultBranch.append(format(arguments?.getString(KEY_DEFAULT_BRANCH)))
-        textViewFragmentOwnerLogin.append(format(arguments?.getString(KEY_OWNER_LOGIN)))
         textViewFragmentLicenseName.append(format(arguments?.getString(KEY_LICENSE_NAME)))
         textViewFragmentLicenseKey.append(format(arguments?.getString(KEY_LICENSE_KEY)))
         textViewFragmentLicenseUrl.append(format(arguments?.getString(KEY_LICENSE_URL)))
 
+        buttonFragmentViewReadMe.setOnClickListener {
+            githubViewModel.searchForReadMe(ownerLogin, repoName)
+        }
+
         buttonFragmentOK.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
+
+        githubViewModel.getReadMeData().observe(viewLifecycleOwner, Observer {
+            ReadMeDialogFragment.newInstance(it).show(parentFragmentManager, ReadMeDialogFragment.TAG)
+        })
     }
 
     private fun format(input: String?): String {

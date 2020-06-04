@@ -5,6 +5,8 @@
     <string name="search_title">Search Github</string>
     <string name="enter_github_user">Enter github user id</string>
     <string name="search_button">Search</string>
+    <string name="viewReadMe">View ReadMe</string>
+    <string name="readme">ReadMe</string>
     <string name="OK">OK</string>
 
     <!-- Repo Fragment -->

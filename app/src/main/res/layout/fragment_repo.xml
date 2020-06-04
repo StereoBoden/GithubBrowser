@@ -167,6 +167,15 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewFragmentLicenseKey" />
 
         <Button
+            android:id="@+id/buttonFragmentViewReadMe"
+            style="@style/GithubButton"
+            android:layout_marginStart="@dimen/unit3"
+            android:layout_marginBottom="@dimen/unit3"
+            android:text="@string/viewReadMe"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
             android:id="@+id/buttonFragmentOK"
             style="@style/GithubButton"
             android:text="@string/OK"

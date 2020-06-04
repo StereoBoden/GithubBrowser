@@ -11,9 +11,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.commit {
-            val gitHubSearchFragment = GithubSearchFragment.newInstance()
-            replace(R.id.fragmentContainer, gitHubSearchFragment)
+        if(savedInstanceState == null) {
+            supportFragmentManager.commit {
+                val gitHubSearchFragment = GithubSearchFragment.newInstance()
+                replace(R.id.fragmentContainer, gitHubSearchFragment)
+            }
         }
     }
 }
