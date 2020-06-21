@@ -14,6 +14,9 @@ class GithubViewModel: ViewModel() {
     private var _githubLiveData: LiveData<List<GithubRepo>> = MutableLiveData()
     private var _repoName: MutableLiveData<String> = MutableLiveData()
 
+    // Selected Github Repo
+    var selectedGithubRepo: MutableLiveData<GithubRepo> = MutableLiveData()
+
     // Github readme data
     private var _gitHubReadMeUrl: LiveData<String> = MutableLiveData()
     private var _readMeValues: MutableLiveData<ReadMeValues> = MutableLiveData()
@@ -53,10 +56,12 @@ class GithubViewModel: ViewModel() {
     }
 
     fun getReadMeData(): LiveData<String> = _readMeData
+    fun clearReadMeData() {
+        _readMeValues.postValue(ReadMeValues("", ""))
+    }
 
     private fun getGithubData() {
         try {
-            // Use switch map when _userId changes, get new github data
             _githubLiveData = Transformations
                 .switchMap(_repoName) {
                     Repository.getRepoData(it)
@@ -64,6 +69,7 @@ class GithubViewModel: ViewModel() {
         }
         catch (e: Exception) {
             isErrorLiveData.value = true
+            isLoadingData.value = false
         }
     }
 
@@ -77,6 +83,7 @@ class GithubViewModel: ViewModel() {
         }
         catch (e: Exception) {
             isErrorLiveData.value = true
+            isLoadingData.value = false
         }
     }
 
@@ -89,6 +96,7 @@ class GithubViewModel: ViewModel() {
                 }
         }
         catch (e: Exception) {
+            isErrorLiveData.value = true
             isLoadingData.value = false
         }
     }

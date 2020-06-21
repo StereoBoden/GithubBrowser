@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jbappz.githubbrowser.R
@@ -21,13 +22,14 @@ class GithubSearchFragment: Fragment() {
     companion object {
         fun newInstance(): GithubSearchFragment = GithubSearchFragment()
     }
-    private val githubViewModel = GithubViewModel()
+    private lateinit var githubViewModel: GithubViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(R.layout.fragment_search, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        githubViewModel = ViewModelProvider(requireActivity()).get(GithubViewModel::class.java)
 
         // Recyclerview adapter
         val githubAdapter = GithubAdapter().apply {
@@ -38,9 +40,8 @@ class GithubSearchFragment: Fragment() {
 
         // Github repo data for searched user id
         githubViewModel.getData().observe(viewLifecycleOwner, Observer<List<GithubRepo>> {
-            progressBar.visibility = View.GONE
+            githubViewModel.isLoadingData.value = false
             githubAdapter.addData(it)
-
             if(it.isEmpty()) Toast.makeText(context, R.string.error_no_repos, Toast.LENGTH_LONG).show()
         })
 
@@ -69,7 +70,8 @@ class GithubSearchFragment: Fragment() {
 
     private fun showFragment(githubRepo: GithubRepo) {
         parentFragmentManager.commit {
-            val githubRepoFragment = GithubRepoFragment.newInstance(githubRepo)
+            githubViewModel.selectedGithubRepo.value = githubRepo
+            val githubRepoFragment = GithubRepoFragment.newInstance()
             setCustomAnimations(
                 R.anim.slide_from_right,
                 R.anim.slide_to_left,
